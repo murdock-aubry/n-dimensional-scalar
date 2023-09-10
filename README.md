@@ -1,6 +1,6 @@
 # Table of Contents
 
-- $\texttt{scalar\_n.f90}$: Fortran file which contains the main routines used in the algorithm for the general $n$ dimensional case.
+- $\texttt{scalar_n.f90}$: Fortran file which contains the main routines used in the algorithm for the general $n$ dimensional case.
 
 - $\texttt{experiment\_i.f90}$: Testing the the algorithm against the lower dimensional code, assuring accuracy.
 
