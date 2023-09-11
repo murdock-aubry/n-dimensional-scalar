@@ -49,18 +49,18 @@ on the interval $[a, b]$, and use the provided external subroutine to evaluate t
 ```
 
 3. Construct the $\ell \times\ell$ matrix $A$ and vector $[\tilde{r}]$ which discretizes the perturbed $n^{th}$ order Riccati equation. For example, in the case where $n = 2$, we obtain from $(3)$
-$
+```math
     \begin{align}
         \mathcal{A} &= \mathcal{D}_\ell + \text{diag}[2r + q_1] \tag{5} \\
         [\tilde{r}] &= -([r'] + [r^2] + [q_1r] + [q_0]) \tag{6}
     \end{align}
-$
+```
 which discretizes the left and right hand sides of $(3)$;
 $$
     \mathcal{A}[\delta] = [\tilde{r}] \tag{7}
 $$    
         
-4. Solve the system (\ref{levin:disc4}) for $[\delta]$ via a QR decomposition.
+4. Solve the system (7) for $[\delta]$ via a QR decomposition.
         
 5. Return the values $[r] + [\delta]$ as the new estimate for the solution on the interval $[a_0, b_0]$.
     
@@ -70,9 +70,9 @@ The algorithm proper takes as input the domain of interest $[a, b]$, the desired
 $[a, b]$. Use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ at on said quadrature. 
 
 2. If the list of accepted interval is empty, then for each quadrature point $t_{i, k}$ use the previously mentioned root solver to compute the $n$ roots of the $n^{\text{th}}$ order complex polynomial
-$$
+```math
     p_i(z) = z^n + q_{n-1}(t_{i,\ell}) + \cdots + q_1(t_{i,\ell})z + q_0(t_{i, \ell}). \tag{8}
-$$
+```
 Ordering the roots in such a way as to minimize the proximity of each root to the roots of $p_{i=1}(z)$, we obtain the $\ell$ values of the $n$ initial guess functions $[r_{10}], \ldots [r_{1n}]$. If the list of accepted intervals is non-empty, the utilize the values of the solutions at the endpoint of the adjacent accepted interval as the constant initial guess functions
 
 1. Using these initial estimates, new estimates $[r_{11}], \ldots [r_{n1}]$ are computed using the subprocedure described above.
