@@ -104,7 +104,7 @@ The second step of the algorithm maintains lists of estimates for the values of 
 
 2. Compute the $n$ convergence paramaters
 $$
-    \xi_i = \frac{\|[\delta]\|_{L^2}}{\|[r_{i}]\|_{L^2}} \ \ \ \ i = 1, \ldots, n. \tag{11}
+    \xi_i = \frac{\|[\delta]\|_{L^2}}{\|[r_{i}]\|_{L^2}}\qquad i = 1, \ldots, n. \tag{11}
 $$
 and append the new values $[r_{i, \text{new}}]$ to the list of estimates.
 
@@ -114,6 +114,91 @@ The above iterative process provides accurate estimates $[r_1], \ldots, [r_n]$ o
 ## Generalization to $n^{\text{th}}$ degree
 
 In this section, the derivation of the analag of $(3)$ for the arbitrary $n$ is shown.
+
+The $n^{\text{th}}$ derivative chain rule of the composition of functions $f\circ g$ is provided by the following formula:
+
+$$
+    \frac{d^n}{dx^n}f(g(x)) = \sum_S A_{m_1, \ldots, m_n} f^{(m_1 + \cdots + m_n)}(g(x)) \prod_{j=1}^n(g^{(j)}(x))^{m_j}, \tag{12}
+$$
+
+where the sum is taken over the collection $S$ of all sequences $(m_1, \ldots, m_n)$ such that
+
+$$
+    m_1 + 2m_2 + \ldots + nm_n = \sum_{i=1}^n im_i = n \tag{13}
+$$
+
+and
+
+$$
+    A_{m_1, \ldots, m_n} = \frac{n!}{m_1!(1!)^{m_1}\cdot m_2!(2!)^{m_2} \cdots m_n!(n!)^{m_n}}\tag{14}
+$$
+
+Substituting $f(t) = \exp(t)$ and $g(t) = \int r(t)dt$, we obtain
+
+$$
+    \frac{d^n}{dx^n}\exp\left(\int r(t)dt \right) = \exp\left(\int r(t)dt \right) \sum_S A_{m_1, \ldots, m_n} \prod_{j=1}^n(r^{(j-1)}(x))^{m_j}\tag{15}
+$$
+
+Therefore, the $n^{\text{th}}$ order Riccati equation for the $n^{\text{th}}$ order equation
+$$
+    y^{(n)}(t) + k^nq(t)y(t) = 0 \tag{16}
+$$
+is given by
+
+$$
+    \sum_S A_{m_1, \ldots, m_n} \prod_{j=1}^n(r^{(j-1)})^{m_j} + k^nq = 0 \tag{17}
+$$    
+
+Deploying Newton's method via perturbation by a function of small magnitude $\delta$;
+
+$$
+    r_{n+1}(t) = r_n(t) + \delta(t) \tag{18}
+$$
+we wish to find (\ref{chain n}) in the case where $g(t) = \int (r(t) + \delta(t))dt$. A direct substitution of (18) into (12) yields
+
+$$
+    \frac{d^n}{dx^n}\exp\left(\int (r(t) + \delta(t))dt \right) = \exp\left(\int (r(t) + \delta(t))dt \right) \sum_S A_{m_1, \ldots, m_n} \prod_{j=1}^n(r^{(j-1)} + \delta^{(j-1)})^{m_j}\tag{19}
+$$
+and so the linearized Riccati equation becomes
+
+$$
+    \sum_S A_{m_1, \ldots, m_n} \prod_{j=1}^n(r^{(j-1)} + \delta^{(j-1)})^{m_j} + k^nq = 0 \tag{20}
+$$
+
+The binomial series provides
+
+$$
+    (r^{(j-1)} + \delta^{(j-1)})^{m_j} = \sum_{k=0}^{m_j} \binom{m_j}k(r^{(j-1)})^{m_j - k}(\delta^{(j-1)})^k. \tag{21}
+$$
+
+For all $i_1, i_2, j_1, j_2 \geq 1$, we make the assumption that $(\delta^{(i_1)})^{j_1}(\delta^{(i_2)})^{j_2} \approx 0$ and thus we only consider the terms $k = 0, 1$ in (21), yielding the following
+
+$$
+    (r^{(j-1)} + \delta^{(j-1)})^{m_j} \approx (r^{(j-1)})^{m_j} + m_j(r^{(j-1)})^{m_j - 1}\delta^{(j-1)} \tag{22}
+$$
+
+Further, under the assumption $b_ib_j \approx 0$ for all $i, j$, we have
+$$
+    \prod_{i=1}^n(a_i + b_i) \approx \prod_{i=1}^n a_i + \sum_j b_j\left(\prod_{i=1, i\neq j}^n a_i \right) \tag{23}
+$$
+
+Therefore, utilizing (22) and (23), we obtain
+
+$$
+    \prod_{j=1}^n(r^{(j-1)} + \delta^{(j-1)})^{m_j} \approx \prod_{j=1}^n (r^{(j-1)})^{m_j} + \sum_{j=1}^nm_j(r^{(j-1)})^{m_j - 1}\delta^{(j-1)}\left[\prod_{i=1, i\neq j}^n(r^{(i-1)})^{m_i} \right] \tag{24}
+$$
+
+Plugging this into the linearized Riccati equation (9), we obtain
+
+$$
+        \sum_S A_{m_1, \ldots, m_n} \left(\prod_{j=1}^n (r^{(j-1)})^{m_j} + \sum_{j=1}^nm_j(r^{(j-1)})^{m_j - 1}\delta^{(j-1)}\left[\prod_{i=1, i\neq j}^n(r^{(i-1)})^{m_i} \right]\right) + k^nq = 0 \tag{25}
+$$
+
+$$
+    \implies \boxed{\sum_{j=1}^n\left(\sum_Sm_j A_{m_1, \ldots, m_n}(r^{(j-1)})^{m_j - 1}\left[\prod_{i=1, i\neq j}^n(r^{(i-1)})^{m_i}\right]\right)\delta^{(j-1)} = - \sum_S A_{m_1, \ldots, m_n}\prod_{j=1}^n(r^{(j-1)})^{m_j} - k^nq} \tag{26}
+$$
+The above equation is discretizable, just as in the lower dimensional cases. The discretization code can be found in the interative steps of the algorithm contained in the subroutine ``scalar-levin-n`` in the file  ``scalar-n.f90.
+``
 
 
 
