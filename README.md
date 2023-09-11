@@ -44,8 +44,8 @@ on the interval $[a, b]$, and use the provided external subroutine to evaluate t
 
 2. Estimate the vector values of the first $(n-1)$ derivatives of $r$ at the Chebyshev nodes through repeated application the spectral differentiation matrix $\mathcal{D}_\ell$ to the vector values of $r$. In particular,
 $$
-    \begin{pmatrix} r^{(i)}(t_{i, \ell}) \\ \vdots \\ r^{(i)}(t_{\ell, \ell}) \end{pmatrix} = 
-    \mathcal{D}_k^{i}\begin{pmatrix} r(t_{i, \ell}) \\ \vdots \\ r(t_{\ell, \ell}) \end{pmatrix} \tag{4}
+    \begin{bmatrix} r^{(i)}(t_{i, \ell}) \\ \vdots \\ r^{(i)}(t_{\ell, \ell}) \end{bmatrix} = 
+    \mathcal{D}_k^{i}\begin{bmatrix} r(t_{i, \ell}) \\ \vdots \\ r(t_{\ell, \ell}) \end{bmatrix} \tag{4}
 $$
 
 3. Construct the $\ell \times\ell$ matrix $A$ and vector $[\tilde{r}]$ which discretizes the perturbed $n^{th}$ order Riccati equation. For example, in the case where $n = 2$, we obtain from $(3)$
