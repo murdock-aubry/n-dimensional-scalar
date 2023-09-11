@@ -38,7 +38,11 @@ $$
 
 A general expression for the discretizable Riccati equation is derived bellow, and is a pivotal step in the completetion of this project. This subprocedure takes as input the interval $[a_0, b_0]$, an integer $\ell$ controlling the number of Chebyshev nodes used in the discretization process, estimates of the value of $r$ at the $\ell-$ point Chebyshev quadrature, and an external subroutine for the evaluation of the coefficient functions $q_0, q_1, \ldots, q_{n-1}$. In return, the algorithm provides estimates for the values of the solution to the initial value problem at the Chebyshev quadrature. The subroutine proceeds as follows.
 
-1. Construct an initial $k$ point Chebyshev extremal quadrature $\{t_{i, \ell }\}_{i=1}^\ell$ on the interval $[a, b]$, and use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ on said quadrature.
+1. Construct an initial $k$ point Chebyshev extremal quadrature 
+
+$\{t_{i, \ell }\}_{i=1}^\ell$ 
+
+on the interval $[a, b]$, and use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ on said quadrature.
 
 2. Estimate the vector values of the first $(n-1)$ derivatives of $r$ at the Chebyshev nodes through repeated application the spectral differentiation matrix $\mathcal{D}_\ell$ to the vector values of $r$. In particular,
 $$
