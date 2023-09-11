@@ -14,13 +14,13 @@
 A popular and well-understood class of ordinary differential equations, commonly refered to as homogenous scalar equations, take on the form
 $$y^{(n)}(t) + q_{n-1}(t)y^{(n-1)} + \cdots + q_{1}(t)y'(t) + q_0(t)y(t) = 0. \tag{1}$$
 
-The cost of numerically representing solutions to this class of equations using standard methods increases with the magnitude of the coefficient functions $\lbraceq_i\rbrace_{i=0}^{n-1}$. However, the phase functions of these equations are solvable, independent of the magnitude of the coefficient functions. More information on the theory, algorithm description, implementation and testing can be found in this [paper](https://arxiv.org/abs/2308.03288), authored by James Bremer and myself. 
+The cost of numerically representing solutions to this class of equations using standard methods increases with the magnitude of the coefficient functions $\lbrace q_i\rbrace_{i=0}^{n-1}$. However, the phase functions of these equations are solvable, independent of the magnitude of the coefficient functions. More information on the theory, algorithm description, implementation and testing can be found in this [paper](https://arxiv.org/abs/2308.03288), authored by James Bremer and myself. 
 
 As you may notice, the implementation and description of the algorithm in the paper only considers for the case where $n=2, 3$, or $4$. Utitlizing the code for the lower dimensional cases, I independently generalized the algorithm to the case where the value of $n$ is unknown at compile time. Further, I conducted several experiments, both comparisons to the lower dimensions to assure accuracy, and to the general cases for large values of $n$. The results are conclusive to run-time independence of the magnitude of the coefficient functions, and quadratic proportionality to the value of $n$.
 
 # Algorithm Description
 
-We now describe the global Levin method; the first of two algorithms considered in this paper. This algorithm computes the $n$ non-oscillatory phase functions $\lbracer_i(t)\rbrace_{i=1}^n$ of the $n^\text{th}$ order Riccati equation, provided their values at some point $c$ in the domain of interest $[a, b]$. These functions can then be used to find the solutions of $(1)$ via the substitution $y = \exp(\int r)$. It operates by in two steps; first by computing initial estimates for the basis functions of the solution space, and secondly by using this initial estimate to initialize an adaptivereccursion utilizing the Levin method.
+We now describe the global Levin method; the first of two algorithms considered in this paper. This algorithm computes the $n$ non-oscillatory phase functions $\lbrace r_i(t)\rbrace_{i=1}^n$ of the $n^\text{th}$ order Riccati equation, provided their values at some point $c$ in the domain of interest $[a, b]$. These functions can then be used to find the solutions of $(1)$ via the substitution $y = \exp(\int r)$. It operates by in two steps; first by computing initial estimates for the basis functions of the solution space, and secondly by using this initial estimate to initialize an adaptivereccursion utilizing the Levin method.
 
 ## The global Levin Method
 
@@ -38,7 +38,7 @@ $$
 
 A general expression for the discretizable Riccati equation is derived bellow, and is a pivotal step in the completetion of this project. This subprocedure takes as input the interval $[a_0, b_0]$, an integer $\ell$ controlling the number of Chebyshev nodes used in the discretization process, estimates of the value of $r$ at the $\ell-$ point Chebyshev quadrature, and an external subroutine for the evaluation of the coefficient functions $q_0, q_1, \ldots, q_{n-1}$. In return, the algorithm provides estimates for the values of the solution to the initial value problem at the Chebyshev quadrature. The subroutine proceeds as follows.
 
-1. Construct an initial $k$ point Chebyshev extremal quadrature $\lbrace t_{i, \ell }\rbrace_{i=1}^\ell$ 
+1. Construct an initial $k$ point Chebyshev extremal quadrature $\rbrace  t_{i, \ell }\rbrace_{i=1}^\ell$ 
 
 on the interval $[a, b]$, and use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ on said quadrature.
 
@@ -66,7 +66,7 @@ $$
     
 The algorithm proper takes as input the domain of interest $[a, b]$, the desired values of the basis functions at some point $c\in [a, b]$, as well as an external subroutine used to evaluate the coefficient functions. The algorithm then returns the values of the non-oscillatory phase functions on a piecewise Chebyshev extremal grid. It maintains two lists of intervals; one storing the intervals which are yet to be utilized, and one storing the list of accepted intervals. Initially, the first list of intervals only contains the original interval $[a, b]$. As long as the first list is non-empty the following steps are repeated:
     
-1. Remove an entry $[a_0, b_0]$ from the first list, and construct an initial $\ell-$ point grid Chebyshev extremal quadrature $\lbracet_{i, \ell}\rbrace_{i=1}^\ell$ on the entire interval
+1. Remove an entry $[a_0, b_0]$ from the first list, and construct an initial $\ell-$ point grid Chebyshev extremal quadrature $\lbrace t_{i, \ell}\rbrace_{i=1}^\ell$ on the entire interval
 $[a, b]$. Use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ at on said quadrature. 
 
 2. If the list of accepted interval is empty, then for each quadrature point $t_{i, k}$ use the previously mentioned root solver to compute the $n$ roots of the $n^{\text{th}}$ order complex polynomial
@@ -96,7 +96,7 @@ anywhere on the entire interval $[a, b]$.
 
 In this section we describe the local Levin method, the second of the two alogorthms described and utilized in this paper. The algorithm operates in three steps. First, reasonable initial estimates are made for the values of the derivatives of the $n$ phase functions $r_1,\ldots, r_n$ on a Chebyshev quadrature, denoted $[r_1], \ldots, [r_n]$. Secondly, these initial estimates are iterated upon via the subprocedure described in the previous section to obtain an accurate estimate of the values of the $n$ solutions at some point $c$ in the domain of interest $[a, b]$. Finally, the general ODE solver described in Appendix (1) of the aforemention paper, is used, in conjuction with the estimated initial values, to solve for the derivatives of all $n$ phase functions on the entire interval. The algorithm takes as input the entire interval of interest $[a, b]$, an integer $\ell$ controlling the number of Chebyshev nodes used in the discretization process, a small subinterval $[a_0, b_0]\subset [a, b]$ containing the point $c_0$ at which to compute estimates of the first $(n-1)$ derivatives of the solutions $r_1, \ldots, r_n$, and an external subroutine used to compute the values of the coefficient functions $q_0, q_1, \ldots, q_{n-1}$. The algorithm outputs the values of the first $(n-1)$ derivatives of the solutions $r_1, \ldots, r_n$ on a piecewise Chebyshev structure over the interval $[a, b]$. The first step of the algorithm proceeds as follows.
 
-1. Construct an $\ell-$ point Chebyshev extremal quadrature $\lbracet_{i, \ell}\rbrace_{i=1}^\ell$ on the subinterval $[c_0, b_0]$, and use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ on said quadrature. The algorithm can be easily modified to instead utilize the subinterval $[a_0, c_0]$.
+1. Construct an $\ell-$ point Chebyshev extremal quadrature $\lbrace t_{i, \ell}\rbrace_{i=1}^\ell$ on the subinterval $[c_0, b_0]$, and use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ on said quadrature. The algorithm can be easily modified to instead utilize the subinterval $[a_0, c_0]$.
 
 2. For each quadrature point $t_{i, k}$ use the previously mentioned root solver to compute the $n$ roots of the $n^{\text{th}}$ order complex polynomial
 $$
