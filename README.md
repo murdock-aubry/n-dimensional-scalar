@@ -20,17 +20,17 @@ As you may notice, the implementation and description of the algorithm in the pa
 
 # Algorithm Description
 
-We now describe the global Levin method; the first of two algorithms considered in this paper. This algorithm computes the $n$ non-oscillatory phase functions $\{r_i(t)\}_{i=1}^n$ of the $n^\text{th}$ order Riccati equation, provided their values at some point $c$ in the domain of interest $[a, b]$. These functions can then be used to find the solutions of $(1)$ via the substitution (\ref{introduction:phaserep2}). It operates by in two steps. first by computing initial estimates for the basis functions of the solution space, and secondly by using this initial estimate to initialize an adaptivereccursion utilizing the Levin method.
+We now describe the global Levin method; the first of two algorithms considered in this paper. This algorithm computes the $n$ non-oscillatory phase functions $\{r_i(t)\}_{i=1}^n$ of the $n^\text{th}$ order Riccati equation, provided their values at some point $c$ in the domain of interest $[a, b]$. These functions can then be used to find the solutions of $(1)$ via the substitution $y = \exp(\int r)$. It operates by in two steps; first by computing initial estimates for the basis functions of the solution space, and secondly by using this initial estimate to initialize an adaptivereccursion utilizing the Levin method.
 
 ## The global Levin Method
 
 Before describing the algorithm proper, we first discuss a subprocedure which estimates the solution of the Riccati equation on a subinterval $[a_0, b_0]\subset [a, b]$. This procedure is used as a step in the iterative process of the algorithm proper, and operates by slightly perturbing a current estimate of the solution through the addition of some small function $\delta(t)$:
 $$
-    r_{m+1}(t) = r_m(t) + \delta(t) \tag{2}
+r_{m+1}(t) = r_m(t) + \delta(t) \tag{2}
 $$
 Inserting $(2)$ into the $n^{\text{th}}$ order Riccati equation, we obtain a discretizable equation. For example, in the second order case, we obtain from $(1)$
 $$
-    \delta'(t) + (2r_m(t) + q_1(t))\delta = - r_m'(t) - r_m^2(t) - q_1r_m(t) - q_0(t) \tag{3}
+\delta'(t) + (2r_m(t) + q_1(t))\delta = - r_m'(t) - r_m^2(t) - q_1r_m(t) - q_0(t) \tag{3}
 $$
 A general expression for the discretizable Riccati equation is derived bellow, and is a pivotal step in the completetion of this project. This subprocedure takes as input the interval $[a_0, b_0]$, an integer $\ell$ controlling the number of Chebyshev nodes used in the discretization process, estimates of the value of $r$ at the $\ell-$ point Chebyshev quadrature, and an external subroutine for the evaluation of the coefficient functions $q_0, q_1, \ldots, q_{n-1}$. In return, the algorithm provides estimates for the values of the solution to the initial value problem at the Chebyshev quadrature. The subroutine proceeds as follows.
 
