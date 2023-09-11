@@ -78,9 +78,9 @@ Ordering the roots in such a way as to minimize the proximity of each root to th
 1. Using these initial estimates, new estimates $[r_{11}], \ldots [r_{n1}]$ are computed using the subprocedure described above.
 
 2. Compute the $n$ convergence paramaters
-$$
+```math
     \xi_i = \frac{\|[\delta]\|_{L^2}}{\|[r_{0i}]\|_{L^2}} \ \ \ \ i = 1, \ldots, n. \tag{9}
-$$
+```
 If $\text{max}_{i=1, \ldots, n}\xi_i < \epsilon_0$, then exit the alogrithm and return the current estimate.
 
 3. Otherwise, subdivide the interval $[a, b]$ into the equal sectors $[a, (a+b)/2], [(a+b)/2, b]$ and exit this loop.
@@ -99,9 +99,9 @@ In this section we describe the local Levin method, the second of the two alogor
 1. Construct an $\ell-$ point Chebyshev extremal quadrature $\lbrace t_{i, \ell}\rbrace_{i=1}^\ell$ on the subinterval $[c_0, b_0]$, and use the provided external subroutine to evaluate the $n$ coefficient functions $q_0,q_1, \ldots, q_{n-1}$ on said quadrature. The algorithm can be easily modified to instead utilize the subinterval $[a_0, c_0]$.
 
 2. For each quadrature point $t_{i, k}$ use the previously mentioned root solver to compute the $n$ roots of the $n^{\text{th}}$ order complex polynomial
-$$
+```math
     p_i(z) = z^n + q_{n-1}(t_{i,\ell})z^{n-1} + \cdots + q_1(t_{i,\ell})z + q_0(t_{i, \ell}). \tag{10}
-$$
+```
 Ordering the roots in such a way as to minimize the proximity of each root to the roots of $p_{i-1}(z)$, we obtain the $\ell$ values of the $n$ initial guess functions $[r_{1,0}], \ldots [r_{n, 0}]$.
 
 The second step of the algorithm maintains lists of estimates for the values of the derivatives of each of the $n$ phase functions on the $\ell-$ point quadrature. Initially, these lists only contain the initial estimates made above. As long as $\max_i \xi_i \geq \epsilon_0$, the following steps are repeated.
@@ -109,9 +109,10 @@ The second step of the algorithm maintains lists of estimates for the values of 
 1. Use the previous iterations' estimates $[r_1], \ldots,[r_n]$ and the subprocedure described in the previous section to compute improved estimates $[r_{1, \text{new}}], \ldots, [r_{n, \text{new}}]$ of the solutions at the quadrature points.
 
 2. Compute the $n$ convergence paramaters
-$$
+
+```math
     \xi_i = \frac{\|[\delta]\|_{L^2}}{\|[r_{i}]\|_{L^2}}\qquad i = 1, \ldots, n. \tag{11}
-$$
+```
 and append the new values $[r_{i, \text{new}}]$ to the list of estimates.
 
 The above iterative process provides accurate estimates $[r_1], \ldots, [r_n]$ of the values of the derivatives of the $n$ phase functions of $(1)$ at the constructed quadrature. The values of the  first $(n-1)$ derivatives of each solution can again be computed through repeated application of the spectral differentiation matrix $\mathscr{D}_\ell$ (see (4)). The first element of each of the vectors of values provides accurate estimates of the values of the solutions at the endpoint $a_0$. The algorithm is completed by applying the ODE solver of Appendix (1) of the aforementioned paper to the Riccati equation with the initial values $r_1(a_0), \ldots, r_n(a_0)$ to obtain the values of the global solutions on a peicewise Chebyshev structure.
@@ -146,9 +147,11 @@ $$
 $$
 
 Therefore, the $n^{\text{th}}$ order Riccati equation for the $n^{\text{th}}$ order equation
+
 $$
     y^{(n)}(t) + k^nq(t)y(t) = 0 \tag{16}
 $$
+
 is given by
 
 $$
@@ -160,11 +163,13 @@ Deploying Newton's method via perturbation by a function of small magnitude $\de
 $$
     r_{n+1}(t) = r_n(t) + \delta(t) \tag{18}
 $$
+
 we wish to find (\ref{chain n}) in the case where $g(t) = \int (r(t) + \delta(t))dt$. A direct substitution of (18) into (12) yields
 
 $$
     \frac{d^n}{dx^n}\exp\left(\int (r(t) + \delta(t))dt \right) = \exp\left(\int (r(t) + \delta(t))dt \right) \sum_S A_{m_1, \ldots, m_n} \prod_{j=1}^n(r^{(j-1)} + \delta^{(j-1)})^{m_j}\tag{19}
 $$
+
 and so the linearized Riccati equation becomes
 
 $$
@@ -203,8 +208,9 @@ $$
 $$
     \implies \boxed{\sum_{j=1}^n\left(\sum_Sm_j A_{m_1, \ldots, m_n}(r^{(j-1)})^{m_j - 1}\left[\prod_{i=1, i\neq j}^n(r^{(i-1)})^{m_i}\right]\right)\delta^{(j-1)} = - \sum_S A_{m_1, \ldots, m_n}\prod_{j=1}^n(r^{(j-1)})^{m_j} - k^nq} \tag{26}
 $$
-The above equation is discretizable, just as in the lower dimensional cases. The discretization code can be found in the interative steps of the algorithm contained in the subroutine ``scalar-levin-n`` in the file  ``scalar-n.f90.
-``
+
+The above equation is discretizable, just as in the lower dimensional cases. The discretization code can be found in the interative steps of the algorithm contained in the subroutine ``scalar-levin-n`` in the file  ``scalar-n.f90
+``.
 
 
 
