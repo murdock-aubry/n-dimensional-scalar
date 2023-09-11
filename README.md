@@ -189,6 +189,7 @@ $$
 $$
 
 Further, under the assumption $b_ib_j \approx 0$ for all $i, j$, we have
+
 $$
     \prod_{i=1}^n(a_i + b_i) \approx \prod_{i=1}^n a_i + \sum_j b_j\left(\prod_{i=1, i\neq j}^n a_i \right) \tag{23}
 $$
