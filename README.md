@@ -1,12 +1,12 @@
 # Table of Contents
 
-- $\texttt{scalar\_n.f90}$: Fortran file which contains the main routines used in the algorithm for the general $n$ dimensional case.
+- ``scalar-n.f90`` Fortran file which contains the main routines used in the algorithm for the general $n$ dimensional case.
 
-- $\texttt{experiment.f90}$: Testing the the algorithm against the lower dimensional code, assuring accuracy.
+- ``experiment-i.f90``: Testing the the algorithm against the lower dimensional code, assuring accuracy.
 
-- $\texttt{odesolve\_n.tex}$: A brute force ODE solver for $n$ dimensional equations used as a step in this algorithm.
+- ``odesolve-n.tex``: A brute force ODE solver for $n$ dimensional equations used as a step in this algorithm.
 
-- $\texttt{partitions.nb}$: A mathematical file with contains for for computing all partitions of positive integers. This data is then compiled in an convenient way and used in a step of the algorith proper.
+- ``partitions.nb``: A mathematical file with contains for for computing all partitions of positive integers. This data is then compiled in an convenient way and used in a step of the algorith proper.
 
 
 # Introduction
