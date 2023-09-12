@@ -196,65 +196,6 @@ module scalar_n
         endif
 
 
-
-
-        !
-        ! Use the eigensolver
-        !
-
-        ! call init_random_seed()
-        ! allocate(ws(kcheb,n), w(n))
-        ! allocate(reigs(n), ieigs(n), idxs(n))
-        ! allocate(rcoefs(n), icoefs(n))
-        
-        ! its = 20000
-        ! do i = 1, kcheb
-
-        !     do j = 1, n-1
-        !         rcoefs(j) = 0
-        !         icoefs(j) = 0
-        !     end do
-
-        !     rcoefs(n) = real(qs0(i))
-        !     icoefs(n) = imag(qs0(i))
-
-            
-
-
-        !     call zamvw(n,rcoefs,icoefs,reigs,ieigs,its,flag)
-
-
-
-        !     if (flag .ne. 0) then
-        !         ier = 256
-        !         return
-        !     endif
-
-        !     do j = 1, n
-        !         w(j) = reigs(j) + ima * ieigs(j)
-        !     end do
-
-
-
-
-        !     if (i .eq. 1) then
-        !         call scalar_sortw(n,w)
-        !         do k = 1, n
-        !             idxs(k) = k
-        !         end do
-        !     else
-        !         do k = 1, n
-        !             idxs(k) = minloc(abs(w(k) - ws(i-1, :)), 1)
-        !         end do
-        !     endif
-
-
-        !     do j = 1, n
-        !         ws(i, idxs(j)) = w(j)
-        !     end do
-
-        ! end do
-
         call root_estimates(n, dk, roots)
 
         !
