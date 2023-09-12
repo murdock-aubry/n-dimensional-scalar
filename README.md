@@ -8,6 +8,8 @@
 
 - ``partitions.nb``: A mathematical file with contains for for computing all partitions of positive integers. This data is then compiled in an convenient way and used in a step of the algorith proper.
 
+Please note that the files ``chebyshev.f90``, ``chebpw.f90``, ``legendre.f90``, ``linalg0.f90`` and ``utils.f90`` are written by my supervisor James Bremer, and are contain pivotal routines in the functionality of my algorithm.
+
 
 # Introduction
 
