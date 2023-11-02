@@ -2,7 +2,7 @@
 
 - ``scalar-n.f90`` Fortran file which contains the main routines used in the algorithm for the general $n$ dimensional case.
 
-- ``experiment-i.f90``: Testing the the algorithm against the lower dimensional code, assuring accuracy.
+- ``experiment-i.f90``: Testing the algorithm against the lower dimensional code, assuring accuracy.
 
 - ``odesolve-n.tex``: A brute force ODE solver for $n$ dimensional equations used as a step in this algorithm.
 
