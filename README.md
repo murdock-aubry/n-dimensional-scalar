@@ -27,9 +27,9 @@ In this section, the derivation of the analag of $(3)$ for the arbitrary $n$ is 
 
 The $n^{\text{th}}$ derivative chain rule of the composition of functions $f\circ g$ is provided by the following formula:
 
-$$
+```math
     \frac{d^n}{dx^n}f(g(x)) = \sum_S A_{m_1, \ldots, m_n} f^{(m_1 + \cdots + m_n)}(g(x)) \prod_{j=1}^n(g^{(j)}(x))^{m_j}, \tag{12}
-$$
+```
 
 where the sum is taken over the collection $S$ of all sequences $(m_1, \ldots, m_n)$ such that
 
