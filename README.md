@@ -14,7 +14,8 @@ Please note that the files ``chebyshev.f90``, ``chebpw.f90``, ``legendre.f90``, 
 # Introduction
 
 A popular and well-understood class of ordinary differential equations, commonly refered to as homogenous scalar equations, take on the form
-$y^{(n)}(t) + q_{n-1}(t)y^{(n-1)} + \cdots + q_{1}(t)y'(t) + q_0(t)y(t) = 0. \tag{1}$
+
+$y^{(n)}(t) + q_{n-1}(t)y^{(n-1)} + \cdots + q_{1}(t)y'(t) + q_0(t)y(t) = 0.$
 
 The cost of numerically representing solutions to this class of equations using standard methods increases with the magnitude of the coefficient functions $\lbrace q_i\rbrace_{i=0}^{n-1}$. However, the phase functions of these equations are solvable, independent of the magnitude of the coefficient functions. More information on the theory, algorithm description, implementation and testing can be found in this [paper](https://arxiv.org/abs/2311.08578), authored by James Bremer and myself. 
 
