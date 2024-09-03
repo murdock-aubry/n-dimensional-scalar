@@ -8,7 +8,7 @@
 
 - ``partitions.nb``: A mathematical file with contains for for computing all partitions of positive integers. This data is then compiled in an convenient way and used in a step of the algorith proper.
 
-Please note that the files ``chebyshev.f90``, ``chebpw.f90``, ``legendre.f90``, ``linalg0.f90`` and ``utils.f90`` are written by my supervisor James Bremer, and are contain pivotal routines in the functionality of my algorithm.
+Please note that the files ``chebyshev.f90``, ``chebpw.f90``, ``legendre.f90``, ``linalg0.f90`` and ``utils.f90`` are written by my supervisor James Bremer, and contain pivotal routines in the functionality of my algorithm.
 
 
 # Introduction
@@ -19,8 +19,7 @@ $y^{(n)}(t) + q_{n-1}(t)y^{(n-1)} + \cdots + q_{1}(t)y'(t) + q_0(t)y(t) = 0.$
 
 The cost of numerically representing solutions to this class of equations using standard methods increases with the magnitude of the coefficient functions $\lbrace q_i\rbrace_{i=0}^{n-1}$. However, the phase functions of these equations are solvable, independent of the magnitude of the coefficient functions. More information on the theory, algorithm description, implementation and testing can be found in this [paper](https://arxiv.org/abs/2311.08578), authored by James Bremer and myself. 
 
-As you may notice, the implementation and description of the algorithm in the paper only considers for the case where $n=2, 3$, or $4$. Utitlizing the code for the lower dimensional cases, I independently generalized the algorithm to the case where the value of $n$ is unknown at compile time. Further, I conducted several experiments, both comparisons to the lower dimensions to assure accuracy, and to the general cases for large values of $n$. The results are conclusive to run-time independence of the magnitude of the coefficient functions, and quadratic proportionality to the value of $n$.
-
+As you may notice, the implementation and description of the algorithm in the paper only considers for the case where $n=2, 3$, or $4$. Utitlizing the code for the lower dimensional cases, I independently generalized the algorithm to the case where the value of $n$ is unknown at compile time. Further, I conducted several experiments in both low dimensions and to the general cases for large values of $n$. The results are conclusive to run-time independence of the magnitude of the coefficient functions, and quadratic proportionality to the value of $n$.
 
 ## Generalization to $n^{\text{th}}$ degree
 
